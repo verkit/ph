@@ -34,7 +34,7 @@ class ApiDioImpl implements ApiDio {
     print(newMap);
     var formData = FormData.fromMap(newMap);
     var response = await _dio.post(
-      'http://localhost:8000/order',
+      'http://103.31.38.189:81/order',
       data: formData,
     );
     return response;

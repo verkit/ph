@@ -9,7 +9,7 @@ import 'package:retrofit/retrofit.dart';
 part 'api_service.g.dart';
 
 @lazySingleton
-@RestApi(baseUrl: 'http://localhost:8000/')
+@RestApi(baseUrl: 'http://103.31.38.189:81/')
 abstract class ApiService {
   @factoryMethod
   factory ApiService(Dio dio, {@Named('BaseUrl') String? baseUrl}) = _ApiService;

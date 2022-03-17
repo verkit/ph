@@ -1,7 +1,4 @@
 abstract class AppString {
-  // Remote API
-  // static const String kBaseUrl = 'localhost:8000';
-
   // Local Database
   static const String CART_BOX = 'cartBox';
 
