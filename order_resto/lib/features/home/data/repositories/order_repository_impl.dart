@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:order_resto/core/params/request_params.dart';
 import 'package:order_resto/core/state/data_state.dart';
@@ -54,7 +53,7 @@ class OrderRepositoryImpl extends OrderRepository {
         ),
       );
     } on DioError catch (e) {
-      debugPrint(e.toString());
+      // debugPrint(e.toString());
       return DataFailed(e);
     }
   }
@@ -88,7 +87,7 @@ class OrderRepositoryImpl extends OrderRepository {
         ),
       );
     } on DioError catch (e) {
-      debugPrint(e.toString());
+      // debugPrint(e.toString());
       return DataFailed(e);
     }
   }
@@ -122,7 +121,7 @@ class OrderRepositoryImpl extends OrderRepository {
         ),
       );
     } on DioError catch (e) {
-      debugPrint(e.toString());
+      // debugPrint(e.toString());
       return DataFailed(e);
     }
   }
@@ -155,7 +154,7 @@ class OrderRepositoryImpl extends OrderRepository {
         ),
       );
     } on DioError catch (e) {
-      debugPrint(e.toString());
+      // debugPrint(e.toString());
       return DataFailed(e);
     }
   }
