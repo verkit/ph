@@ -57,7 +57,7 @@ class FoodTabletItem extends StatelessWidget {
                         child: Icon(Icons.circle, size: 3, color: Colors.grey[200]),
                       ),
                       Text(
-                        item.grup.split('-').last.capitalize(),
+                        item.grup.isNotEmpty ? item.grup.split('-').last.capitalize() : '',
                         style: textSemiBold.copyWith(
                           fontSize: 11,
                           color: AppColor.textColorSecondary,
