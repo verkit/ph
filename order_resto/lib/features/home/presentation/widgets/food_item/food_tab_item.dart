@@ -20,12 +20,17 @@ class FoodTabletItem extends StatelessWidget {
           height: 140,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                item.gambar ?? AppString.imageFoodDummy,
-              ),
-              fit: BoxFit.cover,
-            ),
+            image: item.gambar != null
+                ? DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      item.gambar!,
+                    ),
+                    fit: BoxFit.cover,
+                  )
+                : const DecorationImage(
+                    image: AssetImage('assets/default_food.jpg'),
+                    fit: BoxFit.cover,
+                  ),
             color: AppColor.backgroundColor,
           ),
         ),
