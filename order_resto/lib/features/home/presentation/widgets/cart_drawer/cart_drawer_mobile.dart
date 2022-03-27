@@ -8,31 +8,28 @@ class CartDrawerMobile extends StatefulWidget {
 }
 
 class _CartDrawerMobileState extends State<CartDrawerMobile> {
-  final TextEditingController _editingController = TextEditingController();
-
+  final TextEditingController _paymentSearchController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _tanggalController = TextEditingController();
+  final TextEditingController _jamController = TextEditingController();
   final TextEditingController _hpController = TextEditingController();
-
-  CustomerEntity? customer;
+  final TextEditingController _dpController = TextEditingController();
+  String? _payment;
 
   var regexNoHp = RegExp(r'^(^\+62|62|^08)(\d{3,4}-?){2}\d{3,4}$');
 
   @override
   void dispose() {
-    _editingController.dispose();
+    _paymentSearchController.dispose();
     _hpController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var _paddingContent = EdgeInsets.symmetric(
-      vertical: 24,
-      horizontal: responsiveSize(
-        context,
-        21,
-        minSize: 18,
-        maxSize: 24,
-      ),
+    var _paddingContent = const EdgeInsets.symmetric(
+      vertical: 14,
+      horizontal: 14,
     );
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
@@ -45,21 +42,21 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          context.read<HomeCubit>().closeDrawer();
-                        },
-                        child: Container(
-                          color: Colors.transparent,
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: GestureDetector(
+                    //     onTap: () {
+                    //       context.read<HomeCubit>().closeDrawer();
+                    //     },
+                    //     child: Container(
+                    //       color: Colors.transparent,
+                    //       height: MediaQuery.of(context).size.height,
+                    //       width: MediaQuery.of(context).size.width,
+                    //     ),
+                    //   ),
+                    // ),
                     Container(
                       height: MediaQuery.of(context).size.height,
-                      width: responsiveSize(context, 350, maxSize: 500),
+                      width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         color: AppColor.primaryColor,
                         boxShadow: const [
@@ -98,8 +95,8 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                                           'Keranjang',
                                           style: textBold,
                                           maxLines: 1,
-                                          maxFontSize: 18,
-                                          minFontSize: 18,
+                                          maxFontSize: 14,
+                                          minFontSize: 14,
                                         ),
                                       )
                                     ],
@@ -149,14 +146,14 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                                               AutoSizeText(
                                                 'Total :',
                                                 style: textBold,
-                                                maxFontSize: 18,
-                                                minFontSize: 18,
+                                                maxFontSize: 14,
+                                                minFontSize: 14,
                                               ),
                                               AutoSizeText(
                                                 'Rp ${cartstate2.total}',
                                                 style: textBold,
-                                                maxFontSize: 18,
-                                                minFontSize: 18,
+                                                maxFontSize: 14,
+                                                minFontSize: 14,
                                               ),
                                             ],
                                           ),
@@ -198,22 +195,69 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                                           children: [
                                             const Text('Silahkan diisi'),
                                             const SizedBox(height: 8),
+                                            const Text('Nama'),
+                                            TextField(
+                                              controller: _namaController,
+                                              decoration: const InputDecoration(),
+                                            ),
+                                            const SizedBox(height: 20),
                                             const Text('No HP'),
                                             TextField(
                                               controller: _hpController,
                                               decoration: const InputDecoration(hintText: '0899xxxxx'),
                                             ),
                                             const SizedBox(height: 20),
-                                            const Text('Pilih meja'),
+                                            const Text('Tangal Pesan'),
+                                            InkWell(
+                                              onTap: () async {
+                                                var _date = await showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime(2022),
+                                                  lastDate: DateTime(2222),
+                                                );
+                                                if (_date != null) {
+                                                  DateFormat formatter = DateFormat('dd MMMM yyyy');
+                                                  setState(() {
+                                                    _tanggalController.text = formatter.format(_date);
+                                                  });
+                                                }
+                                              },
+                                              child: TextField(
+                                                controller: _tanggalController,
+                                                decoration: const InputDecoration(enabled: false),
+                                              ),
+                                            ),
                                             const SizedBox(height: 20),
-                                            DropdownSearch<CustomerEntity>(
+                                            const Text('Jam Pesan'),
+                                            InkWell(
+                                              onTap: () async {
+                                                var _time = await showTimePicker(
+                                                  context: context,
+                                                  initialTime: TimeOfDay.now(),
+                                                );
+                                                if (_time != null) {
+                                                  setState(() {
+                                                    _jamController.text = _time.format(context);
+                                                  });
+                                                }
+                                              },
+                                              child: TextField(
+                                                controller: _jamController,
+                                                decoration: const InputDecoration(enabled: false),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            const Text('Pilih pembayaran'),
+                                            const SizedBox(height: 20),
+                                            DropdownSearch<String>(
                                               searchFieldProps: TextFieldProps(
-                                                controller: _editingController,
+                                                controller: _paymentSearchController,
                                                 decoration: InputDecoration(
                                                   suffixIcon: IconButton(
                                                     icon: const Icon(Icons.clear),
                                                     onPressed: () {
-                                                      _editingController.clear();
+                                                      _paymentSearchController.clear();
                                                     },
                                                   ),
                                                 ),
@@ -232,19 +276,19 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                                               ),
                                               dropdownBuilder: (ctx, item) {
                                                 return ListTile(
-                                                  title: Text(item != null ? item.namaPelanggan : ''),
+                                                  title: Text(item ?? ''),
                                                 );
                                               },
                                               autoValidateMode: AutovalidateMode.onUserInteraction,
                                               validator: (u) => u == null ? 'Meja wajib diisi ' : null,
                                               onFind: (String? filter) async {
-                                                return state.customers!
-                                                    .where((element) => element.namaPelanggan.contains(filter!))
+                                                return jenisPembayaran
+                                                    .where((element) => element.contains(filter!))
                                                     .toList();
                                               },
                                               onChanged: (data) {
                                                 setState(() {
-                                                  customer = data;
+                                                  _payment = data;
                                                 });
                                               },
                                               popupItemBuilder: _customPopupItemBuilderExample,
@@ -255,13 +299,24 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                                               ),
                                             ),
                                             const SizedBox(height: 20),
+                                            const Text('Jumlah DP'),
+                                            TextField(
+                                              controller: _dpController,
+                                              keyboardType: TextInputType.number,
+                                              decoration: const InputDecoration(),
+                                            ),
+                                            const SizedBox(height: 20),
                                             ElevatedButton(
                                               onPressed: () async {
-                                                if (_hpController.text.isNotEmpty && customer != null) {
+                                                if (_hpController.text.isNotEmpty && _payment != null) {
                                                   if (regexNoHp.hasMatch(_hpController.text)) {
-                                                    if (customer != null) {
+                                                    if (int.parse(_dpController.text) < 1) {
                                                       var response = await context.read<CartCubit>().sendOrder(
-                                                            customer: customer!,
+                                                            nama: _namaController.text,
+                                                            dp: _dpController.text,
+                                                            jamPemesanan: _jamController.text,
+                                                            tanggalPemesanan: _tanggalController.text,
+                                                            pembayaran: _payment!,
                                                             hp: _hpController.text,
                                                           );
                                                       Navigator.pop(context);
@@ -275,6 +330,7 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                                                         ),
                                                       );
                                                     }
+                                                    EasyLoading.showError('Masukkan angka yang valid');
                                                   } else {
                                                     EasyLoading.showError('Nomor hp tidak valid');
                                                   }
@@ -310,7 +366,7 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
     );
   }
 
-  Widget _customPopupItemBuilderExample(BuildContext context, CustomerEntity item, bool isSelected) {
+  Widget _customPopupItemBuilderExample(BuildContext context, String item, bool isSelected) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8),
       decoration: !isSelected
@@ -322,7 +378,7 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
             ),
       child: ListTile(
         selected: isSelected,
-        title: Text(item.namaPelanggan),
+        title: Text(item),
       ),
     );
   }

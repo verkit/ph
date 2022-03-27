@@ -16,10 +16,11 @@ class ApiDioImpl implements ApiDio {
     Map<String, dynamic> newMap = {};
 
     for (var i = 0; i < orders.length; i++) {
+      // TODO: Tambahkan juga disini data baru
       newMap['kode_sales[$i]'] = orders[i].kodeSales;
       newMap['nama_sales[$i]'] = orders[i].namaSales;
-      newMap['kode_pelanggan[$i]'] = orders[i].kodePelanggan;
-      newMap['nama_pelanggan[$i]'] = orders[i].namaPelanggan;
+      // newMap['kode_pelanggan[$i]'] = orders[i].kodePelanggan;
+      // newMap['nama_pelanggan[$i]'] = orders[i].namaPelanggan;
       newMap['kode_barang[$i]'] = orders[i].kodeBarang;
       newMap['nama_barang[$i]'] = orders[i].namaBarang;
       newMap['quantity[$i]'] = orders[i].qty;

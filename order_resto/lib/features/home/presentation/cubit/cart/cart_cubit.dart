@@ -5,7 +5,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 import 'package:order_resto/core/utils/app_state.dart';
 import 'package:order_resto/features/home/domain/entities/cart_entity.dart';
-import 'package:order_resto/features/home/domain/entities/customer_entity.dart';
 import 'package:order_resto/features/home/domain/entities/food_entity.dart';
 import 'package:order_resto/features/home/domain/entities/order_entity.dart';
 import 'package:order_resto/features/home/domain/usecases/get_carts.dart';
@@ -125,29 +124,41 @@ class CartCubit extends Cubit<CartState> {
 
   Future<String> sendOrder({
     required String hp,
-    required CustomerEntity customer,
+    required String dp,
+    required String tanggalPemesanan,
+    required String jamPemesanan,
+    required String pembayaran,
+    required String nama,
+    // required CustomerEntity customer,
   }) async {
     EasyLoading.show();
     try {
       var position = await _determinePosition();
       var order = OrderEntity(
-        kodePelanggan: customer.kodePelanggan,
-        namaPelanggan: customer.namaPelanggan,
+        // kodePelanggan: customer.kodePelanggan,
+        // namaPelanggan: customer.namaPelanggan,
+        nama: nama,
         latlong: '${position.latitude},${position.longitude}',
         hp: hp,
         items: state.items!,
+        dp: dp,
+        jamPemesanan: jamPemesanan,
+        tanggalPemesanan: tanggalPemesanan,
+        pembayaran: pembayaran,
       );
-      var send = await _sendOrder.execute(order);
+      EasyLoading.dismiss();
+      return order.toString();
+      // var send = await _sendOrder.execute(order);
 
-      if (send.data != null) {
-        if (send.data!.success) {
-          // clearCart();
-        }
-        EasyLoading.dismiss();
-        return send.data!.message;
-      } else {
-        return send.error!.message;
-      }
+      // if (send.data != null) {
+      //   if (send.data!.success) {
+      //     clearCart();
+      //   }
+      //   EasyLoading.dismiss();
+      //   return send.data!.message;
+      // } else {
+      //   return send.error!.message;
+      // }
     } catch (e) {
       EasyLoading.dismiss();
       return 'Terjadi kesalahan';

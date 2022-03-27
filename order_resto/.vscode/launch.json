@@ -14,6 +14,16 @@
             ]
         },
         {
+            "name": "order_resto_web_server",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+             "-d", "web-server", 
+             "--web-port", "8080",
+             "--web-hostname", "0.0.0.0"
+            ]
+        },
+        {
             "name": "order_resto (profile mode)",
             "request": "launch",
             "type": "dart",

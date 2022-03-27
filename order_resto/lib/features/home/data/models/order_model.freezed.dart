@@ -25,30 +25,36 @@ class _$OrderModelTearOff {
   _OrderModel call(
       {String? kodeSales = '0001',
       String? namaSales = 'WAITERS01',
-      required String kodePelanggan,
-      required String namaPelanggan,
       required String kodeBarang,
       required String namaBarang,
       required String satuan,
       required int harga,
       required int qty,
       required String latlong,
+      required String nama,
       required String hp,
       required String grup,
+      required String tanggalPemesanan,
+      required String jamPemesanan,
+      required String pembayaran,
+      required String dp,
       String? condiman}) {
     return _OrderModel(
       kodeSales: kodeSales,
       namaSales: namaSales,
-      kodePelanggan: kodePelanggan,
-      namaPelanggan: namaPelanggan,
       kodeBarang: kodeBarang,
       namaBarang: namaBarang,
       satuan: satuan,
       harga: harga,
       qty: qty,
       latlong: latlong,
+      nama: nama,
       hp: hp,
       grup: grup,
+      tanggalPemesanan: tanggalPemesanan,
+      jamPemesanan: jamPemesanan,
+      pembayaran: pembayaran,
+      dp: dp,
       condiman: condiman,
     );
   }
@@ -64,17 +70,22 @@ const $OrderModel = _$OrderModelTearOff();
 /// @nodoc
 mixin _$OrderModel {
   String? get kodeSales => throw _privateConstructorUsedError;
-  String? get namaSales => throw _privateConstructorUsedError;
-  String get kodePelanggan => throw _privateConstructorUsedError;
-  String get namaPelanggan => throw _privateConstructorUsedError;
+  String? get namaSales =>
+      throw _privateConstructorUsedError; // required String kodePelanggan,
+// required String namaPelanggan,
   String get kodeBarang => throw _privateConstructorUsedError;
   String get namaBarang => throw _privateConstructorUsedError;
   String get satuan => throw _privateConstructorUsedError;
   int get harga => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
   String get latlong => throw _privateConstructorUsedError;
+  String get nama => throw _privateConstructorUsedError;
   String get hp => throw _privateConstructorUsedError;
   String get grup => throw _privateConstructorUsedError;
+  String get tanggalPemesanan => throw _privateConstructorUsedError;
+  String get jamPemesanan => throw _privateConstructorUsedError;
+  String get pembayaran => throw _privateConstructorUsedError;
+  String get dp => throw _privateConstructorUsedError;
   String? get condiman => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -91,16 +102,19 @@ abstract class $OrderModelCopyWith<$Res> {
   $Res call(
       {String? kodeSales,
       String? namaSales,
-      String kodePelanggan,
-      String namaPelanggan,
       String kodeBarang,
       String namaBarang,
       String satuan,
       int harga,
       int qty,
       String latlong,
+      String nama,
       String hp,
       String grup,
+      String tanggalPemesanan,
+      String jamPemesanan,
+      String pembayaran,
+      String dp,
       String? condiman});
 }
 
@@ -116,16 +130,19 @@ class _$OrderModelCopyWithImpl<$Res> implements $OrderModelCopyWith<$Res> {
   $Res call({
     Object? kodeSales = freezed,
     Object? namaSales = freezed,
-    Object? kodePelanggan = freezed,
-    Object? namaPelanggan = freezed,
     Object? kodeBarang = freezed,
     Object? namaBarang = freezed,
     Object? satuan = freezed,
     Object? harga = freezed,
     Object? qty = freezed,
     Object? latlong = freezed,
+    Object? nama = freezed,
     Object? hp = freezed,
     Object? grup = freezed,
+    Object? tanggalPemesanan = freezed,
+    Object? jamPemesanan = freezed,
+    Object? pembayaran = freezed,
+    Object? dp = freezed,
     Object? condiman = freezed,
   }) {
     return _then(_value.copyWith(
@@ -137,14 +154,6 @@ class _$OrderModelCopyWithImpl<$Res> implements $OrderModelCopyWith<$Res> {
           ? _value.namaSales
           : namaSales // ignore: cast_nullable_to_non_nullable
               as String?,
-      kodePelanggan: kodePelanggan == freezed
-          ? _value.kodePelanggan
-          : kodePelanggan // ignore: cast_nullable_to_non_nullable
-              as String,
-      namaPelanggan: namaPelanggan == freezed
-          ? _value.namaPelanggan
-          : namaPelanggan // ignore: cast_nullable_to_non_nullable
-              as String,
       kodeBarang: kodeBarang == freezed
           ? _value.kodeBarang
           : kodeBarang // ignore: cast_nullable_to_non_nullable
@@ -169,6 +178,10 @@ class _$OrderModelCopyWithImpl<$Res> implements $OrderModelCopyWith<$Res> {
           ? _value.latlong
           : latlong // ignore: cast_nullable_to_non_nullable
               as String,
+      nama: nama == freezed
+          ? _value.nama
+          : nama // ignore: cast_nullable_to_non_nullable
+              as String,
       hp: hp == freezed
           ? _value.hp
           : hp // ignore: cast_nullable_to_non_nullable
@@ -176,6 +189,22 @@ class _$OrderModelCopyWithImpl<$Res> implements $OrderModelCopyWith<$Res> {
       grup: grup == freezed
           ? _value.grup
           : grup // ignore: cast_nullable_to_non_nullable
+              as String,
+      tanggalPemesanan: tanggalPemesanan == freezed
+          ? _value.tanggalPemesanan
+          : tanggalPemesanan // ignore: cast_nullable_to_non_nullable
+              as String,
+      jamPemesanan: jamPemesanan == freezed
+          ? _value.jamPemesanan
+          : jamPemesanan // ignore: cast_nullable_to_non_nullable
+              as String,
+      pembayaran: pembayaran == freezed
+          ? _value.pembayaran
+          : pembayaran // ignore: cast_nullable_to_non_nullable
+              as String,
+      dp: dp == freezed
+          ? _value.dp
+          : dp // ignore: cast_nullable_to_non_nullable
               as String,
       condiman: condiman == freezed
           ? _value.condiman
@@ -194,16 +223,19 @@ abstract class _$OrderModelCopyWith<$Res> implements $OrderModelCopyWith<$Res> {
   $Res call(
       {String? kodeSales,
       String? namaSales,
-      String kodePelanggan,
-      String namaPelanggan,
       String kodeBarang,
       String namaBarang,
       String satuan,
       int harga,
       int qty,
       String latlong,
+      String nama,
       String hp,
       String grup,
+      String tanggalPemesanan,
+      String jamPemesanan,
+      String pembayaran,
+      String dp,
       String? condiman});
 }
 
@@ -221,16 +253,19 @@ class __$OrderModelCopyWithImpl<$Res> extends _$OrderModelCopyWithImpl<$Res>
   $Res call({
     Object? kodeSales = freezed,
     Object? namaSales = freezed,
-    Object? kodePelanggan = freezed,
-    Object? namaPelanggan = freezed,
     Object? kodeBarang = freezed,
     Object? namaBarang = freezed,
     Object? satuan = freezed,
     Object? harga = freezed,
     Object? qty = freezed,
     Object? latlong = freezed,
+    Object? nama = freezed,
     Object? hp = freezed,
     Object? grup = freezed,
+    Object? tanggalPemesanan = freezed,
+    Object? jamPemesanan = freezed,
+    Object? pembayaran = freezed,
+    Object? dp = freezed,
     Object? condiman = freezed,
   }) {
     return _then(_OrderModel(
@@ -242,14 +277,6 @@ class __$OrderModelCopyWithImpl<$Res> extends _$OrderModelCopyWithImpl<$Res>
           ? _value.namaSales
           : namaSales // ignore: cast_nullable_to_non_nullable
               as String?,
-      kodePelanggan: kodePelanggan == freezed
-          ? _value.kodePelanggan
-          : kodePelanggan // ignore: cast_nullable_to_non_nullable
-              as String,
-      namaPelanggan: namaPelanggan == freezed
-          ? _value.namaPelanggan
-          : namaPelanggan // ignore: cast_nullable_to_non_nullable
-              as String,
       kodeBarang: kodeBarang == freezed
           ? _value.kodeBarang
           : kodeBarang // ignore: cast_nullable_to_non_nullable
@@ -274,6 +301,10 @@ class __$OrderModelCopyWithImpl<$Res> extends _$OrderModelCopyWithImpl<$Res>
           ? _value.latlong
           : latlong // ignore: cast_nullable_to_non_nullable
               as String,
+      nama: nama == freezed
+          ? _value.nama
+          : nama // ignore: cast_nullable_to_non_nullable
+              as String,
       hp: hp == freezed
           ? _value.hp
           : hp // ignore: cast_nullable_to_non_nullable
@@ -281,6 +312,22 @@ class __$OrderModelCopyWithImpl<$Res> extends _$OrderModelCopyWithImpl<$Res>
       grup: grup == freezed
           ? _value.grup
           : grup // ignore: cast_nullable_to_non_nullable
+              as String,
+      tanggalPemesanan: tanggalPemesanan == freezed
+          ? _value.tanggalPemesanan
+          : tanggalPemesanan // ignore: cast_nullable_to_non_nullable
+              as String,
+      jamPemesanan: jamPemesanan == freezed
+          ? _value.jamPemesanan
+          : jamPemesanan // ignore: cast_nullable_to_non_nullable
+              as String,
+      pembayaran: pembayaran == freezed
+          ? _value.pembayaran
+          : pembayaran // ignore: cast_nullable_to_non_nullable
+              as String,
+      dp: dp == freezed
+          ? _value.dp
+          : dp // ignore: cast_nullable_to_non_nullable
               as String,
       condiman: condiman == freezed
           ? _value.condiman
@@ -296,16 +343,19 @@ class _$_OrderModel implements _OrderModel {
   const _$_OrderModel(
       {this.kodeSales = '0001',
       this.namaSales = 'WAITERS01',
-      required this.kodePelanggan,
-      required this.namaPelanggan,
       required this.kodeBarang,
       required this.namaBarang,
       required this.satuan,
       required this.harga,
       required this.qty,
       required this.latlong,
+      required this.nama,
       required this.hp,
       required this.grup,
+      required this.tanggalPemesanan,
+      required this.jamPemesanan,
+      required this.pembayaran,
+      required this.dp,
       this.condiman});
 
   factory _$_OrderModel.fromJson(Map<String, dynamic> json) =>
@@ -317,11 +367,8 @@ class _$_OrderModel implements _OrderModel {
   @JsonKey()
   @override
   final String? namaSales;
-  @override
-  final String kodePelanggan;
-  @override
-  final String namaPelanggan;
-  @override
+  @override // required String kodePelanggan,
+// required String namaPelanggan,
   final String kodeBarang;
   @override
   final String namaBarang;
@@ -334,15 +381,25 @@ class _$_OrderModel implements _OrderModel {
   @override
   final String latlong;
   @override
+  final String nama;
+  @override
   final String hp;
   @override
   final String grup;
+  @override
+  final String tanggalPemesanan;
+  @override
+  final String jamPemesanan;
+  @override
+  final String pembayaran;
+  @override
+  final String dp;
   @override
   final String? condiman;
 
   @override
   String toString() {
-    return 'OrderModel(kodeSales: $kodeSales, namaSales: $namaSales, kodePelanggan: $kodePelanggan, namaPelanggan: $namaPelanggan, kodeBarang: $kodeBarang, namaBarang: $namaBarang, satuan: $satuan, harga: $harga, qty: $qty, latlong: $latlong, hp: $hp, grup: $grup, condiman: $condiman)';
+    return 'OrderModel(kodeSales: $kodeSales, namaSales: $namaSales, kodeBarang: $kodeBarang, namaBarang: $namaBarang, satuan: $satuan, harga: $harga, qty: $qty, latlong: $latlong, nama: $nama, hp: $hp, grup: $grup, tanggalPemesanan: $tanggalPemesanan, jamPemesanan: $jamPemesanan, pembayaran: $pembayaran, dp: $dp, condiman: $condiman)';
   }
 
   @override
@@ -353,10 +410,6 @@ class _$_OrderModel implements _OrderModel {
             const DeepCollectionEquality().equals(other.kodeSales, kodeSales) &&
             const DeepCollectionEquality().equals(other.namaSales, namaSales) &&
             const DeepCollectionEquality()
-                .equals(other.kodePelanggan, kodePelanggan) &&
-            const DeepCollectionEquality()
-                .equals(other.namaPelanggan, namaPelanggan) &&
-            const DeepCollectionEquality()
                 .equals(other.kodeBarang, kodeBarang) &&
             const DeepCollectionEquality()
                 .equals(other.namaBarang, namaBarang) &&
@@ -364,8 +417,16 @@ class _$_OrderModel implements _OrderModel {
             const DeepCollectionEquality().equals(other.harga, harga) &&
             const DeepCollectionEquality().equals(other.qty, qty) &&
             const DeepCollectionEquality().equals(other.latlong, latlong) &&
+            const DeepCollectionEquality().equals(other.nama, nama) &&
             const DeepCollectionEquality().equals(other.hp, hp) &&
             const DeepCollectionEquality().equals(other.grup, grup) &&
+            const DeepCollectionEquality()
+                .equals(other.tanggalPemesanan, tanggalPemesanan) &&
+            const DeepCollectionEquality()
+                .equals(other.jamPemesanan, jamPemesanan) &&
+            const DeepCollectionEquality()
+                .equals(other.pembayaran, pembayaran) &&
+            const DeepCollectionEquality().equals(other.dp, dp) &&
             const DeepCollectionEquality().equals(other.condiman, condiman));
   }
 
@@ -374,16 +435,19 @@ class _$_OrderModel implements _OrderModel {
       runtimeType,
       const DeepCollectionEquality().hash(kodeSales),
       const DeepCollectionEquality().hash(namaSales),
-      const DeepCollectionEquality().hash(kodePelanggan),
-      const DeepCollectionEquality().hash(namaPelanggan),
       const DeepCollectionEquality().hash(kodeBarang),
       const DeepCollectionEquality().hash(namaBarang),
       const DeepCollectionEquality().hash(satuan),
       const DeepCollectionEquality().hash(harga),
       const DeepCollectionEquality().hash(qty),
       const DeepCollectionEquality().hash(latlong),
+      const DeepCollectionEquality().hash(nama),
       const DeepCollectionEquality().hash(hp),
       const DeepCollectionEquality().hash(grup),
+      const DeepCollectionEquality().hash(tanggalPemesanan),
+      const DeepCollectionEquality().hash(jamPemesanan),
+      const DeepCollectionEquality().hash(pembayaran),
+      const DeepCollectionEquality().hash(dp),
       const DeepCollectionEquality().hash(condiman));
 
   @JsonKey(ignore: true)
@@ -401,16 +465,19 @@ abstract class _OrderModel implements OrderModel {
   const factory _OrderModel(
       {String? kodeSales,
       String? namaSales,
-      required String kodePelanggan,
-      required String namaPelanggan,
       required String kodeBarang,
       required String namaBarang,
       required String satuan,
       required int harga,
       required int qty,
       required String latlong,
+      required String nama,
       required String hp,
       required String grup,
+      required String tanggalPemesanan,
+      required String jamPemesanan,
+      required String pembayaran,
+      required String dp,
       String? condiman}) = _$_OrderModel;
 
   factory _OrderModel.fromJson(Map<String, dynamic> json) =
@@ -420,11 +487,8 @@ abstract class _OrderModel implements OrderModel {
   String? get kodeSales;
   @override
   String? get namaSales;
-  @override
-  String get kodePelanggan;
-  @override
-  String get namaPelanggan;
-  @override
+  @override // required String kodePelanggan,
+// required String namaPelanggan,
   String get kodeBarang;
   @override
   String get namaBarang;
@@ -437,9 +501,19 @@ abstract class _OrderModel implements OrderModel {
   @override
   String get latlong;
   @override
+  String get nama;
+  @override
   String get hp;
   @override
   String get grup;
+  @override
+  String get tanggalPemesanan;
+  @override
+  String get jamPemesanan;
+  @override
+  String get pembayaran;
+  @override
+  String get dp;
   @override
   String? get condiman;
   @override

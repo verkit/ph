@@ -17,7 +17,7 @@ class FoodMobileItem extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          height: 120,
+          height: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             image: item.gambar != null

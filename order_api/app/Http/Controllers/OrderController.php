@@ -66,7 +66,7 @@ class OrderController extends Controller
             for ($i = 0; $i < count($request->hp); $i++) {
                 $answers[] = [
                     "noorder" => $noorder,
-                    "so_pleg" => 1,
+                    "so_pleg" => 'OS',
                     "tanggal" => $date,
                     "jam" => $time,
                     "kode_sales" => $request->kode_sales[$i],

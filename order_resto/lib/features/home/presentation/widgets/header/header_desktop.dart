@@ -45,10 +45,10 @@ class _HeaderDesktopState extends State<HeaderDesktop> {
         children: [
           Text.rich(
             TextSpan(
-              text: 'Order ',
+              text: 'RM ',
               children: [
                 TextSpan(
-                  text: 'Restoran',
+                  text: 'Bulany',
                   style: text.copyWith(),
                 )
               ],

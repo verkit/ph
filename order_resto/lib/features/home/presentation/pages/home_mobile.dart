@@ -25,9 +25,9 @@ class _HomeMobilePageState extends State<HomeMobilePage> {
               children: [
                 SingleChildScrollView(
                   padding: EdgeInsets.fromLTRB(
-                    responsiveSize(context, 48, minSize: 32, maxSize: 48),
-                    120,
-                    responsiveSize(context, 48, minSize: 32, maxSize: 48),
+                    responsiveSize(context, 24, minSize: 16, maxSize: 24),
+                    96,
+                    responsiveSize(context, 24, minSize: 16, maxSize: 24),
                     64,
                   ),
                   child: Column(
@@ -47,16 +47,16 @@ class _HomeMobilePageState extends State<HomeMobilePage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 48),
+                      const SizedBox(height: 32),
                       Text(
                         'Menu',
-                        style: textBold.copyWith(fontSize: 16),
+                        style: textBold,
                       ),
-                      const SizedBox(height: 36),
+                      const SizedBox(height: 24),
                       BlocBuilder<CartCubit, CartState>(
                         builder: (context, cartstate) {
                           return GridView.count(
-                            crossAxisCount: (MediaQuery.of(context).size.width / 300).round(),
+                            crossAxisCount: (MediaQuery.of(context).size.width / 200).round(),
                             crossAxisSpacing: 24,
                             mainAxisSpacing: 24,
                             shrinkWrap: true,

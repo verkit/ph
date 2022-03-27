@@ -32,12 +32,12 @@ class _HeaderMobileState extends State<HeaderMobile> {
     return Container(
       color: AppColor.primaryColor,
       padding: EdgeInsets.symmetric(
-        vertical: 24,
+        vertical: 12,
         horizontal: responsiveSize(
           context,
-          48,
-          minSize: 48,
-          maxSize: 48,
+          24,
+          minSize: 24,
+          maxSize: 24,
         ),
       ),
       child: Row(
@@ -45,10 +45,10 @@ class _HeaderMobileState extends State<HeaderMobile> {
         children: [
           Text.rich(
             TextSpan(
-              text: 'Order ',
+              text: 'RM ',
               children: [
                 TextSpan(
-                  text: 'Restoran',
+                  text: 'Bulany',
                   style: text.copyWith(),
                 )
               ],
@@ -56,8 +56,8 @@ class _HeaderMobileState extends State<HeaderMobile> {
             style: textBold.copyWith(
               fontSize: fontResponsive(
                 context,
-                18,
-                maxSize: 18,
+                14,
+                maxSize: 14,
               ),
             ),
           ),

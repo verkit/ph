@@ -10,19 +10,25 @@ class OrderEntity with _$OrderEntity {
   const factory OrderEntity({
     @Default('0001') String? kodeSales,
     @Default('WAITERS01') String? namaSales,
-    required String kodePelanggan,
-    required String namaPelanggan,
+    // required String kodePelanggan,
+    // required String namaPelanggan,
     required String latlong,
+    required String nama,
     required String hp,
     required List<CartEntity> items,
+    required String tanggalPemesanan,
+    required String jamPemesanan,
+    required String pembayaran,
+    required String dp,
   }) = _OrderEntity;
 
   List<OrderModel> toListModel() {
     List<OrderModel> orders = [];
     for (var item in items) {
       orders.add(OrderModel(
-        kodePelanggan: kodePelanggan,
-        namaPelanggan: namaPelanggan,
+        // kodePelanggan: kodePelanggan,
+        // namaPelanggan: namaPelanggan,
+        nama: nama,
         kodeBarang: item.makanan.kodeBarang,
         namaBarang: item.makanan.namaBarang,
         satuan: item.makanan.namaKemasan,
@@ -32,6 +38,10 @@ class OrderEntity with _$OrderEntity {
         latlong: latlong,
         hp: hp,
         grup: item.makanan.grup,
+        dp: dp,
+        jamPemesanan: jamPemesanan,
+        tanggalPemesanan: tanggalPemesanan,
+        pembayaran: pembayaran,
       ));
     }
     return orders;

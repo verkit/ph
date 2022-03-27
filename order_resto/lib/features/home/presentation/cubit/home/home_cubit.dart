@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:order_resto/core/params/request_params.dart';
@@ -18,8 +19,14 @@ class HomeCubit extends Cubit<HomeState> {
   final GetGrups _getGrups;
   final GetFoods _getFoods;
   final GetCustomers _getCustomers;
-  HomeCubit(this._getGrups, this._getFoods, this._getCustomers)
-      : super(const HomeState(isDrawerOpen: false, status: AppState.idle));
+  HomeCubit(
+    this._getGrups,
+    this._getFoods,
+    this._getCustomers,
+  ) : super(const HomeState(
+          isDrawerOpen: false,
+          status: AppState.idle,
+        ));
 
   openDrawer() {
     emit(state.copyWith(
@@ -49,7 +56,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   searchQuery(String query) async {
     // emit(state.copyWith(status: AppState.progress));
+    EasyLoading.show();
     var foods = await _getFoods(FoodRequestParams(query: query));
+    EasyLoading.dismiss();
     emit(state.copyWith(
       status: AppState.success,
       foods: foods.data,
@@ -58,7 +67,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   searchFilter(String filter) async {
     // emit(state.copyWith(status: AppState.progress));
+    EasyLoading.show();
     var foods = await _getFoods(FoodRequestParams(group: filter));
+    EasyLoading.dismiss();
     emit(state.copyWith(
       status: AppState.success,
       foods: foods.data,
@@ -67,7 +78,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   clearFilter() async {
     // emit(state.copyWith(status: AppState.progress));
+    EasyLoading.show();
     var foods = await _getFoods(const FoodRequestParams());
+    EasyLoading.dismiss();
     emit(state.copyWith(
       status: AppState.success,
       foods: foods.data,
@@ -76,9 +89,10 @@ class HomeCubit extends Cubit<HomeState> {
 
   selectGroup(GroupEntity group) async {
     // emit(state.copyWith(status: AppState.progress));
-
+    EasyLoading.show();
     if (group == state.selectedGroup) {
       var foods = await _getFoods(const FoodRequestParams());
+      EasyLoading.dismiss();
       return emit(state.copyWith(
         status: AppState.success,
         selectedGroup: null,
@@ -86,6 +100,7 @@ class HomeCubit extends Cubit<HomeState> {
       ));
     } else {
       var foods = await _getFoods(FoodRequestParams(group: '${group.kode}-${group.name}'));
+      EasyLoading.dismiss();
       return emit(state.copyWith(
         status: AppState.success,
         selectedGroup: group,

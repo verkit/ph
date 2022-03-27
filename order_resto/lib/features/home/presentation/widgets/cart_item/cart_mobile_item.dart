@@ -23,72 +23,66 @@ class _CartMobileItemState extends State<CartMobileItem> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.only(bottom: 24.0),
+      padding: const EdgeInsets.only(bottom: 12.0),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () => widget.onDecrease(),
-                    icon: Icon(
-                      Remix.indeterminate_circle_fill,
-                      color: Colors.redAccent[400],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: responsiveSize(
-                        context,
-                        14,
-                        maxSize: 21,
-                        minSize: 6,
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+              IconButton(
+                onPressed: () => widget.onDecrease(),
+                icon: Icon(
+                  Remix.indeterminate_circle_fill,
+                  color: Colors.redAccent[400],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    const SizedBox(width: 8),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
                       child: CachedNetworkImage(
                         imageUrl: widget.item.makanan.gambar ?? AppString.imageFoodDummy,
-                        height: 70,
-                        width: 100,
+                        height: 40,
+                        width: 60,
                         // height: responsiveSize(context, 30, maxSize: 50, minSize: 40),
                         // width: responsiveSize(context, 50, maxSize: 83, minSize: 40),
                         fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                  AutoSizeText(
-                    widget.item.qty.toString(),
-                    style: textBold,
-                    maxLines: 1,
-                    maxFontSize: 12,
-                    minFontSize: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: AutoSizeText(
-                      'x',
-                      style: textBold.copyWith(
-                        color: AppColor.textColorSecondary,
-                      ),
-                      maxLines: 1,
-                      maxFontSize: 12,
-                      minFontSize: 10,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 120,
-                    child: AutoSizeText(
-                      widget.item.makanan.namaBarang,
+                    const SizedBox(width: 16),
+                    AutoSizeText(
+                      widget.item.qty.toString(),
                       style: textBold,
-                      maxLines: 3,
-                      maxFontSize: 12,
-                      minFontSize: 10,
+                      maxLines: 1,
+                      maxFontSize: 10,
+                      minFontSize: 8,
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: AutoSizeText(
+                        'x',
+                        style: textBold.copyWith(
+                          color: AppColor.textColorSecondary,
+                        ),
+                        maxLines: 1,
+                        maxFontSize: 10,
+                        minFontSize: 8,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 120,
+                      child: AutoSizeText(
+                        widget.item.makanan.namaBarang,
+                        style: textBold,
+                        maxLines: 3,
+                        maxFontSize: 10,
+                        minFontSize: 8,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 6.0),
@@ -99,8 +93,8 @@ class _CartMobileItemState extends State<CartMobileItem> {
                       style: textBold.copyWith(
                         color: AppColor.textColorSecondary,
                       ),
-                      maxFontSize: 12,
-                      minFontSize: 10,
+                      maxFontSize: 10,
+                      minFontSize: 8,
                     ),
                     IconButton(
                       onPressed: () => widget.onIncrease(),
@@ -116,14 +110,13 @@ class _CartMobileItemState extends State<CartMobileItem> {
           ),
           Row(
             children: [
-              const SizedBox(width: 60),
+              const SizedBox(width: 48),
               Expanded(
                 child: TextField(
                   onChanged: widget.changeCondiman,
                   decoration: const InputDecoration(border: InputBorder.none, hintText: 'Catatan'),
                   style: text.copyWith(
-                    color: AppColor.textColorSecondary,
-                    fontSize: fontResponsive(context, 9),
+                    fontSize: 11,
                   ),
                 ),
               ),
