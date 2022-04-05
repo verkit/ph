@@ -33,12 +33,7 @@ class _HeaderTabletState extends State<HeaderTablet> {
       color: AppColor.primaryColor,
       padding: EdgeInsets.symmetric(
         vertical: 24,
-        horizontal: responsiveSize(
-          context,
-          64,
-          minSize: 48,
-          maxSize: 64,
-        ),
+        horizontal: responsiveSize(context, 48, minSize: 32, maxSize: 48),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

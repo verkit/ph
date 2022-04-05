@@ -131,3 +131,14 @@ final textSemiBold = GoogleFonts.poppins(fontWeight: FontWeight.w600);
 final textBold = GoogleFonts.poppins(fontWeight: FontWeight.w700);
 final textExtraBold = GoogleFonts.poppins(fontWeight: FontWeight.w800);
 final textBlack = GoogleFonts.poppins(fontWeight: FontWeight.w900);
+
+const InputDecoration inputDecoration = InputDecoration(
+  constraints: BoxConstraints(maxHeight: 30, minHeight: 30),
+  contentPadding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+  border: InputBorder.none,
+  focusedBorder: InputBorder.none,
+  errorBorder: InputBorder.none,
+  enabledBorder: InputBorder.none,
+  disabledBorder: InputBorder.none,
+  focusedErrorBorder: InputBorder.none,
+);

@@ -46,9 +46,10 @@ class CartCubit extends Cubit<CartState> {
   void changeCondiman(int i, String condiman) {
     emit(state.copyWith(status: AppState.progress));
 
-    var carts = state.items;
-    var newCarts = carts![i].copyWith(condiman: condiman);
-    carts[i] = newCarts;
+    var carts = state.items!;
+    carts[i] = carts[i].copyWith(condiman: condiman);
+    _insertCart.execute(carts);
+
     emit(state.copyWith(
       items: carts,
       status: AppState.success,

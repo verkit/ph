@@ -16,25 +16,17 @@ class FoodMobileItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          height: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            image: item.gambar != null
-                ? DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      item.gambar!,
-                    ),
-                    fit: BoxFit.cover,
-                  )
-                : const DecorationImage(
-                    image: AssetImage('assets/default_food.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-            color: AppColor.backgroundColor,
-          ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: item.gambar != null
+              ? Image.network(item.gambar!)
+              : Image.asset(
+                  'assets/default_food.jpg',
+                  height: MediaQuery.of(context).size.width / 3.5,
+                  fit: BoxFit.cover,
+                ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -43,46 +35,55 @@ class FoodMobileItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item.namaBarang,
-                    style: textBold.copyWith(fontSize: 10),
+                    item.namaBarang.capitalize(),
+                    style: textBold.copyWith(fontSize: 11),
                     maxLines: 2,
                   ),
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      Text(
-                        'Rp ${item.hargajual1}',
-                        style: textSemiBold.copyWith(
-                          fontSize: 10,
-                          color: AppColor.textColorSecondary,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Icon(Icons.circle, size: 3, color: Colors.grey[200]),
-                      ),
-                      Text(
-                        item.grup.isNotEmpty ? item.grup.split('-').last.capitalize() : '',
-                        style: textSemiBold.copyWith(
-                          fontSize: 10,
-                          color: AppColor.textColorSecondary,
-                        ),
-                      ),
-                    ],
-                  )
+                  const SizedBox(height: 2),
+                  // Text(
+                  //   item.grup.isNotEmpty ? item.grup.split('-').last.capitalize() : '',
+                  //   style: text.copyWith(
+                  //     fontSize: 10,
+                  //     color: AppColor.textColorSecondary,
+                  //   ),
+                  //   overflow: TextOverflow.ellipsis,
+                  //   maxLines: 1,
+                  // ),
+                  // const SizedBox(height: 2),
+                  Text(
+                    'Rp ${item.hargajual1.currency()}',
+                    style: textMedium.copyWith(fontSize: 11),
+                    maxLines: 1,
+                  ),
                 ],
               ),
             ),
-            IconButton(
-              onPressed: onAdd,
-              icon: Icon(Remix.add_circle_fill, color: AppColor.buttonColor),
-              splashColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-            )
+            // IconButton(
+            //   onPressed: onAdd,
+            //   icon: Icon(Remix.add_circle_fill, color: AppColor.buttonColor),
+            //   splashColor: Colors.transparent,
+            //   hoverColor: Colors.transparent,
+            //   focusColor: Colors.transparent,
+            //   highlightColor: Colors.transparent,
+            // )
           ],
         ),
+        const SizedBox(height: 8),
+        ElevatedButton(
+          onPressed: onAdd,
+          child: Text(
+            'Tambah',
+            style: textBold.copyWith(
+              fontSize: 11,
+              color: Colors.white,
+            ),
+          ),
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            fixedSize: Size(MediaQuery.of(context).size.width, 30),
+          ),
+        )
       ],
     );
   }

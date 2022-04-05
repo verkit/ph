@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:order_resto/core/utils/colors.dart';
 import 'package:order_resto/core/utils/constants.dart';
+import 'package:order_resto/core/utils/extension.dart';
 import 'package:order_resto/core/utils/theme.dart';
 import 'package:order_resto/features/home/domain/entities/cart_entity.dart';
 import 'package:remixicon/remixicon.dart';

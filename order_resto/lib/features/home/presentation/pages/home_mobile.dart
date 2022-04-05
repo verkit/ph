@@ -24,16 +24,12 @@ class _HomeMobilePageState extends State<HomeMobilePage> {
             body: Stack(
               children: [
                 SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(
-                    responsiveSize(context, 24, minSize: 16, maxSize: 24),
-                    96,
-                    responsiveSize(context, 24, minSize: 16, maxSize: 24),
-                    64,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(0, 96, 0, 64),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SingleChildScrollView(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: List.generate(
@@ -47,48 +43,62 @@ class _HomeMobilePageState extends State<HomeMobilePage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 32),
-                      Text(
-                        'Menu',
-                        style: textBold,
-                      ),
-                      const SizedBox(height: 24),
-                      BlocBuilder<CartCubit, CartState>(
-                        builder: (context, cartstate) {
-                          return GridView.count(
-                            crossAxisCount: (MediaQuery.of(context).size.width / 200).round(),
-                            crossAxisSpacing: 24,
-                            mainAxisSpacing: 24,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            children: List.generate(
-                              state.foods!.length,
-                              (i) => FoodItem(
-                                item: state.foods![i],
-                                onAdd: () {
-                                  context.read<CartCubit>().insertItem(state.foods![i], cartstate.qty!);
-                                },
-                              ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                          responsiveSize(context, 24, minSize: 16, maxSize: 24),
+                          32,
+                          responsiveSize(context, 24, minSize: 16, maxSize: 24),
+                          0,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Menu',
+                              style: textBold,
                             ),
-                          );
-                        },
-                      ),
-                      // GridView.builder(
-                      //   shrinkWrap: true,
-                      //   physics: const NeverScrollableScrollPhysics(),
-                      //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      //     maxCrossAxisExtent: 400,
-                      //     crossAxisSpacing: 24,
-                      //     mainAxisSpacing: 24,
-                      //   ),
-                      //   itemBuilder: (ctx, i) {
-                      //     return FoodItem(
-                      //       name: foodGroups[0].name,
-                      //       iconPath: foodGroups[0].icon,
-                      //     );
-                      //   },
-                      //   itemCount: 15,
-                      // )
+                            const SizedBox(height: 24),
+                            BlocBuilder<CartCubit, CartState>(
+                              builder: (context, cartstate) {
+                                return GridView.count(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 12,
+                                  mainAxisSpacing: 8,
+                                  shrinkWrap: true,
+                                  childAspectRatio: 3 / 4,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  children: List.generate(
+                                    state.foods!.length,
+                                    (i) => FoodItem(
+                                      item: state.foods![i],
+                                      onAdd: () {
+                                        context.read<CartCubit>().insertItem(state.foods![i], cartstate.qty!);
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            // GridView.builder(
+                            //   shrinkWrap: true,
+                            //   physics: const NeverScrollableScrollPhysics(),
+                            //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                            //     maxCrossAxisExtent: 400,
+                            //     crossAxisSpacing: 24,
+                            //     mainAxisSpacing: 24,
+                            //   ),
+                            //   itemBuilder: (ctx, i) {
+                            //     return FoodItem(
+                            //       name: foodGroups[0].name,
+                            //       iconPath: foodGroups[0].icon,
+                            //     );
+                            //   },
+                            //   itemCount: 15,
+                            // )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
