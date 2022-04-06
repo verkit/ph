@@ -73,7 +73,7 @@ class FoodMobileItem extends StatelessWidget {
           onPressed: onAdd,
           child: Text(
             'Tambah',
-            style: textBold.copyWith(
+            style: text.copyWith(
               fontSize: 11,
               color: Colors.white,
             ),

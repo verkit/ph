@@ -66,7 +66,7 @@ class _HomeMobilePageState extends State<HomeMobilePage> {
                                   crossAxisSpacing: 12,
                                   mainAxisSpacing: 8,
                                   shrinkWrap: true,
-                                  childAspectRatio: 3 / 4,
+                                  childAspectRatio: MediaQuery.of(context).size.width < 360 ? 3 / 5 : 7 / 10,
                                   physics: const NeverScrollableScrollPhysics(),
                                   children: List.generate(
                                     state.foods!.length,

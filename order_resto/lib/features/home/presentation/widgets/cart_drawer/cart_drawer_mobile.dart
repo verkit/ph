@@ -122,7 +122,7 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                                           children: [
                                             Text(
                                               'Total : Rp ${cartstate2.total.currency()}',
-                                              style: textBold.copyWith(fontSize: 14),
+                                              style: textSemiBold.copyWith(fontSize: 14),
                                             ),
                                           ],
                                         ),
@@ -158,7 +158,7 @@ class _CartDrawerMobileState extends State<CartDrawerMobile> {
                                   },
                                   child: const Text('Pesan'),
                                   style: ElevatedButton.styleFrom(
-                                    fixedSize: Size(responsiveSize(context, 250, minSize: 200, maxSize: 400), 50),
+                                    minimumSize: Size(MediaQuery.of(context).size.width, 50),
                                   ),
                                 ),
                               ),

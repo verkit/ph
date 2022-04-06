@@ -39,7 +39,7 @@ class _CartMobileItemState extends State<CartMobileItem> {
                         children: [
                           Text(
                             widget.item.makanan.namaBarang,
-                            style: textBold.copyWith(fontSize: 13.0),
+                            style: textSemiBold.copyWith(fontSize: 13.0),
                             maxLines: 3,
                           ),
                           const SizedBox(height: 6),
