@@ -25,9 +25,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
-      mobile: (ctx) => CheckoutMobile(),
-      tablet: (ctx) => CheckoutTablet(),
-      desktop: (ctx) => CheckoutDesktop(),
+      mobile: (ctx) => const CheckoutMobile(),
+      tablet: (ctx) => const CheckoutTablet(),
+      desktop: (ctx) => const CheckoutDesktop(),
     );
   }
 }

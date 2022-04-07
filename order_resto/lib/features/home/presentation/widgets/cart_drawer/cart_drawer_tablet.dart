@@ -8,22 +8,6 @@ class CartDrawerTablet extends StatefulWidget {
 }
 
 class _CartDrawerTabletState extends State<CartDrawerTablet> {
-  final TextEditingController _paymentSearchController = TextEditingController();
-  final TextEditingController _namaController = TextEditingController();
-  final TextEditingController _tanggalController = TextEditingController();
-  final TextEditingController _jamController = TextEditingController();
-  final TextEditingController _hpController = TextEditingController();
-  final TextEditingController _dpController = TextEditingController();
-  String? _payment;
-  var regexNoHp = RegExp(r'^(^\+62|62|^08)(\d{3,4}-?){2}\d{3,4}$');
-
-  @override
-  void dispose() {
-    _paymentSearchController.dispose();
-    _hpController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     var _paddingContent = EdgeInsets.symmetric(
@@ -60,7 +44,7 @@ class _CartDrawerTabletState extends State<CartDrawerTablet> {
                     ),
                     Container(
                       height: MediaQuery.of(context).size.height,
-                      width: responsiveSize(context, 500, maxSize: 500),
+                      width: responsiveSize(context, 500, maxSize: 400),
                       decoration: BoxDecoration(
                         color: AppColor.primaryColor,
                         boxShadow: const [
@@ -80,26 +64,24 @@ class _CartDrawerTabletState extends State<CartDrawerTablet> {
                                 Expanded(
                                   child: Row(
                                     children: [
-                                      Visibility(
-                                        visible: cartstate.items != null && cartstate.items!.isNotEmpty,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            context.read<CartCubit>().clearCart();
-                                          },
-                                          icon: Icon(
-                                            Remix.delete_bin_6_fill,
-                                            size: 24,
-                                            color: Colors.redAccent[400],
-                                          ),
-                                        ),
-                                      ),
+                                      // Visibility(
+                                      //   visible: cartstate.items != null && cartstate.items!.isNotEmpty,
+                                      //   child: IconButton(
+                                      //     onPressed: () {
+                                      //       context.read<CartCubit>().clearCart();
+                                      //     },
+                                      //     icon: Icon(
+                                      //       Remix.delete_bin_6_fill,
+                                      //       size: 24,
+                                      //       color: Colors.redAccent[400],
+                                      //     ),
+                                      //   ),
+                                      // ),
                                       const SizedBox(width: 12),
                                       Expanded(
-                                        child: AutoSizeText(
+                                        child: Text(
                                           'Keranjang',
-                                          style: textBold,
-                                          maxFontSize: 18,
-                                          minFontSize: 18,
+                                          style: textBold.copyWith(fontSize: 14),
                                         ),
                                       )
                                     ],
@@ -139,27 +121,15 @@ class _CartDrawerTabletState extends State<CartDrawerTablet> {
                                             },
                                           ),
                                         ),
-                                        const Divider(),
-                                        SizedBox(
-                                          width: MediaQuery.of(context).size.width,
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              AutoSizeText(
-                                                'Total :',
-                                                style: textBold,
-                                                maxFontSize: 18,
-                                                minFontSize: 18,
-                                              ),
-                                              AutoSizeText(
-                                                'Rp ${cartstate2.total}',
-                                                style: textBold,
-                                                maxFontSize: 18,
-                                                minFontSize: 18,
-                                              ),
-                                            ],
-                                          ),
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              'Total : Rp ${cartstate2.total.currency()}',
+                                              style: textSemiBold.copyWith(fontSize: 14),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -189,168 +159,11 @@ class _CartDrawerTabletState extends State<CartDrawerTablet> {
                               child: Center(
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (ctx) {
-                                        return SimpleDialog(
-                                          title: const Text('Form pemesanan'),
-                                          contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
-                                          children: [
-                                            const Text('Silahkan diisi'),
-                                            const SizedBox(height: 8),
-                                            const Text('Nama'),
-                                            TextField(
-                                              controller: _namaController,
-                                              decoration: const InputDecoration(),
-                                            ),
-                                            const SizedBox(height: 20),
-                                            const Text('No HP'),
-                                            TextField(
-                                              controller: _hpController,
-                                              decoration: const InputDecoration(hintText: '0899xxxxx'),
-                                            ),
-                                            const SizedBox(height: 20),
-                                            const Text('Tangal Pesan'),
-                                            InkWell(
-                                              onTap: () async {
-                                                var _date = await showDatePicker(
-                                                  context: context,
-                                                  initialDate: DateTime.now(),
-                                                  firstDate: DateTime(2022),
-                                                  lastDate: DateTime(2222),
-                                                );
-                                                if (_date != null) {
-                                                  DateFormat formatter = DateFormat('dd MMMM yyyy');
-                                                  setState(() {
-                                                    _tanggalController.text = formatter.format(_date);
-                                                  });
-                                                }
-                                              },
-                                              child: TextField(
-                                                controller: _tanggalController,
-                                                decoration: const InputDecoration(enabled: false),
-                                              ),
-                                            ),
-                                            const SizedBox(height: 20),
-                                            const Text('Jam Pesan'),
-                                            InkWell(
-                                              onTap: () async {
-                                                var _time = await showTimePicker(
-                                                  context: context,
-                                                  initialTime: TimeOfDay.now(),
-                                                );
-                                                if (_time != null) {
-                                                  setState(() {
-                                                    _jamController.text = _time.format(context);
-                                                  });
-                                                }
-                                              },
-                                              child: TextField(
-                                                controller: _jamController,
-                                                decoration: const InputDecoration(enabled: false),
-                                              ),
-                                            ),
-                                            const SizedBox(height: 20),
-                                            const Text('Pilih pembayaran'),
-                                            const SizedBox(height: 20),
-                                            DropdownSearch<String>(
-                                              searchFieldProps: TextFieldProps(
-                                                controller: _paymentSearchController,
-                                                decoration: InputDecoration(
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(Icons.clear),
-                                                    onPressed: () {
-                                                      _paymentSearchController.clear();
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              mode: Mode.BOTTOM_SHEET,
-                                              maxHeight: 700,
-                                              isFilteredOnline: true,
-                                              showClearButton: true,
-                                              showSelectedItems: true,
-                                              compareFn: (item, selectedItem) => item == selectedItem,
-                                              showSearchBox: true,
-                                              dropdownSearchDecoration: InputDecoration(
-                                                // labelText: 'User *',
-                                                filled: true,
-                                                fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                                              ),
-                                              dropdownBuilder: (ctx, item) {
-                                                return ListTile(
-                                                  title: Text(item ?? ''),
-                                                );
-                                              },
-                                              autoValidateMode: AutovalidateMode.onUserInteraction,
-                                              validator: (u) => u == null ? 'Meja wajib diisi ' : null,
-                                              onFind: (String? filter) async {
-                                                return jenisPembayaran
-                                                    .where((element) => element.contains(filter!))
-                                                    .toList();
-                                              },
-                                              onChanged: (data) {
-                                                setState(() {
-                                                  _payment = data;
-                                                });
-                                              },
-                                              popupItemBuilder: _customPopupItemBuilderExample,
-                                              popupSafeArea: const PopupSafeAreaProps(top: true, bottom: true),
-                                              scrollbarProps: ScrollbarProps(
-                                                isAlwaysShown: true,
-                                                thickness: 7,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 20),
-                                            const Text('Jumlah DP'),
-                                            TextField(
-                                              controller: _dpController,
-                                              keyboardType: TextInputType.number,
-                                              decoration: const InputDecoration(),
-                                            ),
-                                            const SizedBox(height: 20),
-                                            ElevatedButton(
-                                              onPressed: () async {
-                                                if (_hpController.text.isNotEmpty && _payment != null) {
-                                                  if (regexNoHp.hasMatch(_hpController.text)) {
-                                                    if (int.parse(_dpController.text) < 1) {
-                                                      var response = await context.read<CartCubit>().sendOrder(
-                                                            nama: _namaController.text,
-                                                            dp: _dpController.text,
-                                                            jamPemesanan: _jamController.text,
-                                                            tanggalPemesanan: _tanggalController.text,
-                                                            pembayaran: _payment!,
-                                                            hp: _hpController.text,
-                                                          );
-                                                      Navigator.pop(context);
-                                                      showDialog(
-                                                        context: context,
-                                                        builder: (_) => SimpleDialog(
-                                                          title: const Text('Pesan'),
-                                                          children: [
-                                                            Center(child: Text(response)),
-                                                          ],
-                                                        ),
-                                                      );
-                                                    }
-                                                    EasyLoading.showError('Masukkan angka yang valid');
-                                                  } else {
-                                                    EasyLoading.showError('Nomor hp tidak valid');
-                                                  }
-                                                } else {
-                                                  EasyLoading.showError('Masukin semua');
-                                                }
-                                              },
-                                              child: const Text('Pesan'),
-                                            )
-                                          ],
-                                        );
-                                      },
-                                    );
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => const CheckoutPage()));
                                   },
                                   child: const Text('Pesan'),
                                   style: ElevatedButton.styleFrom(
-                                    fixedSize: Size(responsiveSize(context, 250, minSize: 200, maxSize: 400), 50),
+                                    minimumSize: Size(MediaQuery.of(context).size.width, 50),
                                   ),
                                 ),
                               ),
@@ -366,23 +179,6 @@ class _CartDrawerTabletState extends State<CartDrawerTablet> {
           ),
         );
       },
-    );
-  }
-
-  Widget _customPopupItemBuilderExample(BuildContext context, String item, bool isSelected) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: !isSelected
-          ? null
-          : BoxDecoration(
-              border: Border.all(color: Theme.of(context).primaryColor),
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
-      child: ListTile(
-        selected: isSelected,
-        title: Text(item),
-      ),
     );
   }
 }
