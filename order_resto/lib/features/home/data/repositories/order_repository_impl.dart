@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:order_resto/core/params/request_params.dart';
-import 'package:order_resto/core/state/data_state.dart';
+import 'package:order_resto/core/state/local_data_state.dart';
+import 'package:order_resto/core/state/remote_data_state.dart';
 import 'package:order_resto/features/home/data/datasources/local/local_data_source.dart';
 import 'package:order_resto/features/home/data/datasources/remote/api_dio.dart';
 import 'package:order_resto/features/home/data/datasources/remote/api_service.dart';
@@ -26,7 +28,7 @@ class OrderRepositoryImpl extends OrderRepository {
 
   // Remote database / API
   @override
-  Future<DataState<List<CustomerEntity>>> getCustomers(RequestParams params) async {
+  Future<RemoteDataState<List<CustomerEntity>>> getCustomers(RequestParams params) async {
     try {
       final httpResponse = await _apiService.getCustomers(
         limit: params.limit,
@@ -41,10 +43,10 @@ class OrderRepositoryImpl extends OrderRepository {
             entity.add(item.toEntity());
           }
         }
-        return DataSuccess(entity);
+        return RemoteDataSuccess(entity);
       }
 
-      return DataFailed(
+      return RemoteDataFailed(
         DioError(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
@@ -54,12 +56,12 @@ class OrderRepositoryImpl extends OrderRepository {
       );
     } on DioError catch (e) {
       // debugPrint(e.toString());
-      return DataFailed(e);
+      return RemoteDataFailed(e);
     }
   }
 
   @override
-  Future<DataState<List<FoodEntity>>> getFoods(FoodRequestParams params) async {
+  Future<RemoteDataState<List<FoodEntity>>> getFoods(FoodRequestParams params) async {
     try {
       final httpResponse = await _apiService.getFoods(
         limit: params.limit,
@@ -75,10 +77,10 @@ class OrderRepositoryImpl extends OrderRepository {
             entity.add(item.toEntity());
           }
         }
-        return DataSuccess(entity);
+        return RemoteDataSuccess(entity);
       }
 
-      return DataFailed(
+      return RemoteDataFailed(
         DioError(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
@@ -88,12 +90,12 @@ class OrderRepositoryImpl extends OrderRepository {
       );
     } on DioError catch (e) {
       // debugPrint(e.toString());
-      return DataFailed(e);
+      return RemoteDataFailed(e);
     }
   }
 
   @override
-  Future<DataState<List<GroupEntity>>> getGroups(RequestParams params) async {
+  Future<RemoteDataState<List<GroupEntity>>> getGroups(RequestParams params) async {
     try {
       final httpResponse = await _apiService.getGroups(
         limit: params.limit,
@@ -109,10 +111,10 @@ class OrderRepositoryImpl extends OrderRepository {
           }
         }
         entity.sort((a, b) => a.kode.compareTo(b.kode));
-        return DataSuccess(entity);
+        return RemoteDataSuccess(entity);
       }
 
-      return DataFailed(
+      return RemoteDataFailed(
         DioError(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
@@ -122,12 +124,12 @@ class OrderRepositoryImpl extends OrderRepository {
       );
     } on DioError catch (e) {
       // debugPrint(e.toString());
-      return DataFailed(e);
+      return RemoteDataFailed(e);
     }
   }
 
   @override
-  Future<DataState<List<SalesEntity>>> getSalesses(RequestParams params) async {
+  Future<RemoteDataState<List<SalesEntity>>> getSalesses(RequestParams params) async {
     try {
       final httpResponse = await _apiService.getSales(
         limit: params.limit,
@@ -142,10 +144,10 @@ class OrderRepositoryImpl extends OrderRepository {
             entity.add(item.toEntity());
           }
         }
-        return DataSuccess(entity);
+        return RemoteDataSuccess(entity);
       }
 
-      return DataFailed(
+      return RemoteDataFailed(
         DioError(
           error: httpResponse.response.statusMessage,
           response: httpResponse.response,
@@ -155,20 +157,20 @@ class OrderRepositoryImpl extends OrderRepository {
       );
     } on DioError catch (e) {
       // debugPrint(e.toString());
-      return DataFailed(e);
+      return RemoteDataFailed(e);
     }
   }
 
   @override
-  Future<DataState<PostResponse>> sendOrder(OrderEntity orders) async {
+  Future<RemoteDataState<PostResponse>> sendOrder(OrderEntity orders) async {
     try {
       final httpResponse = await _apiDio.sendOrder(orders.toListModel());
 
       if (httpResponse.statusCode == HttpStatus.ok) {
-        return DataSuccess(PostResponse.fromJson(httpResponse.data));
+        return RemoteDataSuccess(PostResponse.fromJson(httpResponse.data));
       }
 
-      return DataFailed(
+      return RemoteDataFailed(
         DioError(
           error: httpResponse.statusMessage,
           response: httpResponse,
@@ -177,14 +179,19 @@ class OrderRepositoryImpl extends OrderRepository {
         ),
       );
     } on DioError catch (e) {
-      return DataFailed(e);
+      return RemoteDataFailed(e);
     }
   }
 
   // Lokal database
   @override
-  Future<List<CartEntity>> getCarts() async {
-    return _localDataSource.getCarts();
+  Future<LocalDataState<List<CartEntity>>> getCarts() async {
+    try {
+      var carts = await _localDataSource.getCarts();
+      return LocalDataSuccess(carts);
+    } on HiveError catch (e) {
+      return LocalDataFailed(e);
+    }
   }
 
   // @override
@@ -193,8 +200,12 @@ class OrderRepositoryImpl extends OrderRepository {
   // }
 
   @override
-  Future<void> removeAllItemCart() {
-    return _localDataSource.removeAllCart();
+  Future<LocalDataState<void>> removeAllItemCart() async {
+    try {
+      return LocalDataSuccess(_localDataSource.removeAllCart());
+    } on HiveError catch (e) {
+      return LocalDataFailed(e);
+    }
   }
 
   // @override
@@ -203,7 +214,11 @@ class OrderRepositoryImpl extends OrderRepository {
   // }
 
   @override
-  Future<void> saveItemCart(List<CartEntity> carts) async {
-    return _localDataSource.insertCart(carts);
+  Future<LocalDataState<void>> saveItemCart(List<CartEntity> carts) async {
+    try {
+      return LocalDataSuccess(_localDataSource.insertCart(carts));
+    } on HiveError catch (e) {
+      return LocalDataFailed(e);
+    }
   }
 }

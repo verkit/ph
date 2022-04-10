@@ -146,7 +146,7 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
               autoValidateMode: AutovalidateMode.onUserInteraction,
               validator: (u) => u == null ? 'Pembayaran wajib diisi ' : null,
               onFind: (String? filter) async {
-                return jenisPembayaran.where((element) => element.contains(filter!)).toList();
+                return AppString.jenisPembayaran.where((element) => element.contains(filter!)).toList();
               },
               onChanged: (data) {
                 setState(() {

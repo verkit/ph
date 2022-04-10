@@ -12,8 +12,10 @@ import 'package:order_resto/core/utils/observer.dart';
 import 'package:order_resto/core/utils/theme.dart';
 import 'package:order_resto/features/home/domain/entities/cart_entity.dart';
 import 'package:order_resto/features/home/domain/entities/food_entity.dart';
-import 'package:order_resto/features/home/presentation/cubit/cart/cart_cubit.dart';
-import 'package:order_resto/features/home/presentation/cubit/home/home_cubit.dart';
+import 'package:order_resto/features/home/presentation/bloc/app/app_bloc.dart';
+import 'package:order_resto/features/home/presentation/bloc/cart/cart_cubit.dart';
+import 'package:order_resto/features/home/presentation/bloc/dashboard/dashboard_bloc.dart';
+import 'package:order_resto/features/home/presentation/bloc/home/home_cubit.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 Future<void> main() async {
@@ -54,6 +56,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt<HomeCubit>()),
         BlocProvider(create: (_) => getIt<CartCubit>()),
+        BlocProvider(create: (_) => getIt<AppBloc>()),
+        BlocProvider(create: (_) => getIt<DashboardBloc>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

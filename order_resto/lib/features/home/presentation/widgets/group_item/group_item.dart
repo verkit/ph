@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_resto/core/utils/colors.dart';
 import 'package:order_resto/core/utils/theme.dart';
 import 'package:order_resto/features/home/domain/entities/group_entity.dart';
-import 'package:order_resto/features/home/presentation/cubit/home/home_cubit.dart';
+import 'package:order_resto/features/home/presentation/bloc/home/home_cubit.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 part 'group_desktop_item.dart';

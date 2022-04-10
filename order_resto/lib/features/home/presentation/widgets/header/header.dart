@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_resto/core/utils/colors.dart';
 import 'package:order_resto/core/utils/theme.dart';
-import 'package:order_resto/features/home/presentation/cubit/cart/cart_cubit.dart';
-import 'package:order_resto/features/home/presentation/cubit/home/home_cubit.dart';
+import 'package:order_resto/features/home/presentation/bloc/cart/cart_cubit.dart';
+import 'package:order_resto/features/home/presentation/bloc/home/home_cubit.dart';
 import 'package:remixicon/remixicon.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

@@ -35,12 +35,12 @@ class CartCubit extends Cubit<CartState> {
 
   void loadItem() async {
     emit(state.copyWith(items: [], status: AppState.progress));
-    var data = await _getCarts.execute();
+    var _carts = await _getCarts.execute();
     int qty = 0;
-    for (var item in data) {
+    for (var item in _carts.data!) {
       qty += item.qty;
     }
-    emit(state.copyWith(items: data, qty: qty, status: AppState.success));
+    emit(state.copyWith(items: _carts.data, qty: qty, status: AppState.success));
   }
 
   void changeCondiman(int i, String condiman) {
