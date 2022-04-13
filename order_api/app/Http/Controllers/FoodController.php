@@ -54,4 +54,26 @@ class FoodController extends Controller
             ->where('grup', '=', $group)
             ->paginate($limit);
     }
+
+    public function uploadPhoto(Request $request, $id)
+    {
+        $this->validate($request, [
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $food = Food::find($id);
+        if ($food == null) {
+            return response()->json(['message' => 'Food not found'], 404);
+        }
+
+        $imageName = $id.'.'.$request->gambar->getClientOriginalExtension();
+        // $food->gambar = request()->file('gambar')->store('gambar');
+        $food->gambar = $request->gambar->move(storage_path('app/public/'), $imageName);
+        // $current_image_path = storage_path('app/public/').$food->gambar;
+        // if (file_exists($current_image_path)) {
+        //     unlink($current_image_path);
+        // }
+        $food->save();
+        return response()->json($food, 200);
+    }
 }

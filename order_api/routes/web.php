@@ -21,40 +21,41 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->get('/tae', function () use ($router) {
-    $check = Order::where('tanggal', '2022-03-05')->get();
-    $a = [];
-    foreach ($check as $c) {
-        array_push($a, $c->noorder);
-    }
-    $u = array_unique($a);
-    return count($u);
-// print_r(array_unique($a));
-});
+// $router->get('/tae', function () use ($router) {
+//     $check = Order::where('tanggal', '2022-03-05')->get();
+//     $a = [];
+//     foreach ($check as $c) {
+//         array_push($a, $c->noorder);
+//     }
+//     $u = array_unique($a);
+//     return count($u);
+// // print_r(array_unique($a));
+// });
 
 $router->get('/sales','SalesController@index');
 $router->get('/food','FoodController@index');
 $router->get('/pelanggan','PelangganController@index');
 $router->get('/grup','GrupController@index');
 $router->post('/order','OrderController@create');
+$router->post('/upload/{id}','FoodController@uploadPhoto');
 
-$router->post('/order-test',function (Request $request) use ($router){
+// $router->post('/order-test',function (Request $request) use ($router){
     
-    for ($i = 0; $i < count($request->kode_sales); $i++) {
-        $answers[] = [
-            "kode_sales" => $request->kode_sales[$i],
-            "nama_sales" => $request->nama_sales[$i],
-            "latlong" => $request->latlong[$i],
-        ];
-    }
-    Order::insert($answers);
-    return response()->json(
-        [
-           'data' => [
-                'response' => 200,
-                'message' => 'asdasd'
-                // 'message' => 'Nomor order anda : ' . $noorder,
-           ]
-        ],
-    );
-});
+//     for ($i = 0; $i < count($request->kode_sales); $i++) {
+//         $answers[] = [
+//             "kode_sales" => $request->kode_sales[$i],
+//             "nama_sales" => $request->nama_sales[$i],
+//             "latlong" => $request->latlong[$i],
+//         ];
+//     }
+//     Order::insert($answers);
+//     return response()->json(
+//         [
+//            'data' => [
+//                 'response' => 200,
+//                 'message' => 'asdasd'
+//                 // 'message' => 'Nomor order anda : ' . $noorder,
+//            ]
+//         ],
+//     );
+// });
