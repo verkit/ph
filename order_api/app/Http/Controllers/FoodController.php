@@ -74,6 +74,10 @@ class FoodController extends Controller
         //     unlink($current_image_path);
         // }
         $food->save();
-        return response()->json($food, 200);
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil memperbarui gambar',
+            'data' => $food,
+        ], 200);
     }
 }
