@@ -58,7 +58,7 @@ class FoodController extends Controller
     public function uploadPhoto(Request $request, $id)
     {
         $this->validate($request, [
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $food = Food::find($id);
@@ -74,10 +74,12 @@ class FoodController extends Controller
         //     unlink($current_image_path);
         // }
         $food->save();
+        // dd($food);
+        $newfood = Food::find($id);
         return response()->json([
             'success' => true,
             'message' => 'Berhasil memperbarui gambar',
-            'data' => $food,
+            'data' => $newfood,
         ], 200);
     }
 }
