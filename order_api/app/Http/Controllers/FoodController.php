@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FoodController extends Controller
 {
@@ -68,18 +69,17 @@ class FoodController extends Controller
 
         $imageName = $id.'.'.$request->gambar->getClientOriginalExtension();
         // $food->gambar = request()->file('gambar')->store('gambar');
-        $food->gambar = $request->gambar->move(storage_path('app/public/'), $imageName);
+        $request->gambar->move(storage_path('app/public/'), $imageName);
+        $food->gambar = storage_path('app/public/'. $imageName);
         // $current_image_path = storage_path('app/public/').$food->gambar;
         // if (file_exists($current_image_path)) {
         //     unlink($current_image_path);
         // }
         $food->save();
-        // dd($food);
-        $newfood = Food::find($id);
         return response()->json([
             'success' => true,
             'message' => 'Berhasil memperbarui gambar',
-            'data' => $newfood,
+            'data' => $food,
         ], 200);
     }
 }
