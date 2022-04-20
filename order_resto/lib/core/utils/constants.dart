@@ -17,4 +17,7 @@ abstract class AppString {
       'https://www.wbcsd.org/var/site/storage/images/media/images/fresh_pa/80809-2-eng-GB/FRESH_PA_i1140.jpg';
 
   static const List<String> jenisPembayaran = ['Debit BCA', 'Debit Mandiri', 'Debit BRI', 'QRIS'];
+
+  static image(String uri) =>
+      uri.replaceAll('/home/bulany/app/order_api/storage/app/public/', 'http://103.31.38.189:81/storage/');
 }

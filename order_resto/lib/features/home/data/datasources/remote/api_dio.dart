@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:order_resto/features/home/data/models/order_model.dart';
 
 abstract class ApiDio {
   Future<Response> sendOrder(List<OrderModel> orders);
+  Future<Response> uploadImage(PlatformFile image, int id);
 }
 
 @LazySingleton(as: ApiDio)
@@ -36,6 +38,18 @@ class ApiDioImpl implements ApiDio {
     var formData = FormData.fromMap(newMap);
     var response = await _dio.post(
       'http://103.31.38.189:81/order',
+      data: formData,
+    );
+    return response;
+  }
+
+  @override
+  Future<Response> uploadImage(PlatformFile image, int id) async {
+    var formData = FormData.fromMap({
+      'gambar': MultipartFile.fromBytes(image.bytes!, filename: image.name),
+    });
+    var response = await _dio.post(
+      'http://103.31.38.189:81/upload/$id',
       data: formData,
     );
     return response;

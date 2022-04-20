@@ -23,7 +23,7 @@ class FoodDesktopItem extends StatelessWidget {
             image: item.gambar != null
                 ? DecorationImage(
                     image: CachedNetworkImageProvider(
-                      item.gambar!,
+                      AppString.image(item.gambar!),
                     ),
                     fit: BoxFit.cover,
                   )

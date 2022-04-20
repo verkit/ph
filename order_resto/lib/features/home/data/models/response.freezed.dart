@@ -198,10 +198,12 @@ PostResponse _$PostResponseFromJson(Map<String, dynamic> json) {
 class _$PostResponseTearOff {
   const _$PostResponseTearOff();
 
-  _PostResponse call({required bool success, required String message}) {
+  _PostResponse call(
+      {bool? success, String? message, Map<String, dynamic>? data}) {
     return _PostResponse(
       success: success,
       message: message,
+      data: data,
     );
   }
 
@@ -215,8 +217,9 @@ const $PostResponse = _$PostResponseTearOff();
 
 /// @nodoc
 mixin _$PostResponse {
-  bool get success => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
+  bool? get success => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -229,7 +232,7 @@ abstract class $PostResponseCopyWith<$Res> {
   factory $PostResponseCopyWith(
           PostResponse value, $Res Function(PostResponse) then) =
       _$PostResponseCopyWithImpl<$Res>;
-  $Res call({bool success, String message});
+  $Res call({bool? success, String? message, Map<String, dynamic>? data});
 }
 
 /// @nodoc
@@ -244,16 +247,21 @@ class _$PostResponseCopyWithImpl<$Res> implements $PostResponseCopyWith<$Res> {
   $Res call({
     Object? success = freezed,
     Object? message = freezed,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
       success: success == freezed
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -265,7 +273,7 @@ abstract class _$PostResponseCopyWith<$Res>
           _PostResponse value, $Res Function(_PostResponse) then) =
       __$PostResponseCopyWithImpl<$Res>;
   @override
-  $Res call({bool success, String message});
+  $Res call({bool? success, String? message, Map<String, dynamic>? data});
 }
 
 /// @nodoc
@@ -282,16 +290,21 @@ class __$PostResponseCopyWithImpl<$Res> extends _$PostResponseCopyWithImpl<$Res>
   $Res call({
     Object? success = freezed,
     Object? message = freezed,
+    Object? data = freezed,
   }) {
     return _then(_PostResponse(
       success: success == freezed
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -299,19 +312,21 @@ class __$PostResponseCopyWithImpl<$Res> extends _$PostResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PostResponse implements _PostResponse {
-  const _$_PostResponse({required this.success, required this.message});
+  const _$_PostResponse({this.success, this.message, this.data});
 
   factory _$_PostResponse.fromJson(Map<String, dynamic> json) =>
       _$$_PostResponseFromJson(json);
 
   @override
-  final bool success;
+  final bool? success;
   @override
-  final String message;
+  final String? message;
+  @override
+  final Map<String, dynamic>? data;
 
   @override
   String toString() {
-    return 'PostResponse(success: $success, message: $message)';
+    return 'PostResponse(success: $success, message: $message, data: $data)';
   }
 
   @override
@@ -320,14 +335,16 @@ class _$_PostResponse implements _PostResponse {
         (other.runtimeType == runtimeType &&
             other is _PostResponse &&
             const DeepCollectionEquality().equals(other.success, success) &&
-            const DeepCollectionEquality().equals(other.message, message));
+            const DeepCollectionEquality().equals(other.message, message) &&
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(success),
-      const DeepCollectionEquality().hash(message));
+      const DeepCollectionEquality().hash(message),
+      const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override
@@ -342,15 +359,19 @@ class _$_PostResponse implements _PostResponse {
 
 abstract class _PostResponse implements PostResponse {
   const factory _PostResponse(
-      {required bool success, required String message}) = _$_PostResponse;
+      {bool? success,
+      String? message,
+      Map<String, dynamic>? data}) = _$_PostResponse;
 
   factory _PostResponse.fromJson(Map<String, dynamic> json) =
       _$_PostResponse.fromJson;
 
   @override
-  bool get success;
+  bool? get success;
   @override
-  String get message;
+  String? get message;
+  @override
+  Map<String, dynamic>? get data;
   @override
   @JsonKey(ignore: true)
   _$PostResponseCopyWith<_PostResponse> get copyWith =>

@@ -19,7 +19,7 @@ class FoodMobileItem extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: item.gambar != null
-              ? Image.network(item.gambar!)
+              ? Image.network(AppString.image(item.gambar!))
               : Image.asset(
                   'assets/default_food.jpg',
                   height: MediaQuery.of(context).size.width / 3.5,

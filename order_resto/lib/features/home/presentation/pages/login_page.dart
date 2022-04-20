@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:order_resto/core/utils/theme.dart';
-import 'package:order_resto/features/home/presentation/bloc/app/app_bloc.dart';
+import 'package:order_resto/features/home/presentation/bloc/app/login_info.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,15 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late AppBloc bloc;
   TextEditingController password = TextEditingController();
-
-  @override
-  void initState() {
-    bloc = context.read<AppBloc>();
-    bloc.add(CheckFromSigninPageEvent(context));
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 ElevatedButton(
                   onPressed: password.text.isNotEmpty
                       ? () {
-                          bloc.add(SignInEvent(password.text, context));
+                          context.read<LoginInfo>().signin(password.text);
                         }
                       : null,
                   child: const Text('Login'),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:file_picker/src/platform_file.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:order_resto/core/params/request_params.dart';
@@ -219,6 +220,28 @@ class OrderRepositoryImpl extends OrderRepository {
       return LocalDataSuccess(_localDataSource.insertCart(carts));
     } on HiveError catch (e) {
       return LocalDataFailed(e);
+    }
+  }
+
+  @override
+  Future<RemoteDataState<PostResponse>> uploadImage(PlatformFile image, int id) async {
+    try {
+      final httpResponse = await _apiDio.uploadImage(image, id);
+
+      if (httpResponse.statusCode == HttpStatus.ok) {
+        return RemoteDataSuccess(PostResponse.fromJson(httpResponse.data));
+      }
+
+      return RemoteDataFailed(
+        DioError(
+          error: httpResponse.statusMessage,
+          response: httpResponse,
+          requestOptions: httpResponse.requestOptions,
+          type: DioErrorType.response,
+        ),
+      );
+    } on DioError catch (e) {
+      return RemoteDataFailed(e);
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:order_resto/core/params/request_params.dart';
 import 'package:order_resto/core/state/local_data_state.dart';
 import 'package:order_resto/core/state/remote_data_state.dart';
@@ -16,6 +17,7 @@ abstract class OrderRepository {
   Future<RemoteDataState<List<SalesEntity>>> getSalesses(RequestParams params);
   Future<RemoteDataState<List<CustomerEntity>>> getCustomers(RequestParams params);
   Future<RemoteDataState<PostResponse>> sendOrder(OrderEntity orders);
+  Future<RemoteDataState<PostResponse>> uploadImage(PlatformFile image, int id);
 
   // Database methods
   Future<LocalDataState<List<CartEntity>>> getCarts();

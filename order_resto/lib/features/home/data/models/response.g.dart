@@ -20,12 +20,14 @@ Map<String, dynamic> _$$_LinkToJson(_$_Link instance) => <String, dynamic>{
 
 _$_PostResponse _$$_PostResponseFromJson(Map<String, dynamic> json) =>
     _$_PostResponse(
-      success: json['success'] as bool,
-      message: json['message'] as String,
+      success: json['success'] as bool?,
+      message: json['message'] as String?,
+      data: json['data'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$_PostResponseToJson(_$_PostResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
       'message': instance.message,
+      'data': instance.data,
     };

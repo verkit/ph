@@ -17,8 +17,9 @@ class Link with _$Link {
 @freezed
 class PostResponse with _$PostResponse {
   const factory PostResponse({
-    required bool success,
-    required String message,
+    bool? success,
+    String? message,
+    Map<String, dynamic>? data,
   }) = _PostResponse;
 
   factory PostResponse.fromJson(Map<String, dynamic> json) => _$PostResponseFromJson(json);

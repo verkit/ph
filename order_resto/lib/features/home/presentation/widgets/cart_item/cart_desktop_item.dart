@@ -73,7 +73,7 @@ class _CartDesktopItemState extends State<CartDesktopItem> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: CachedNetworkImage(
-                          imageUrl: widget.item.makanan.gambar ?? AppString.imageFoodDummy,
+                          imageUrl: AppString.image(widget.item.makanan.gambar ?? AppString.imageFoodDummy),
                           height: 75,
                           width: 75,
                           fit: BoxFit.cover,
