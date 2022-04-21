@@ -79,18 +79,18 @@ class _MyAppState extends State<MyApp> {
     router = GoRouter(
       urlPathStrategy: UrlPathStrategy.path,
       initialLocation: '/',
-      // redirect: (state) {
-      //   final loggedIn = loginInfo.loggedIn;
+      redirect: (state) {
+        final loggedIn = loginInfo.loggedIn;
 
-      //   switch (state.subloc) {
-      //     case '/login':
-      //       return loggedIn ? '/dashboard' : null;
-      //     case '/dashboard':
-      //       return loggedIn ? null : '/login';
-      //     default:
-      //       return null;
-      //   }
-      // },
+        switch (state.subloc) {
+          case '/login':
+            return loggedIn ? '/dashboard' : null;
+          case '/dashboard':
+            return loggedIn ? null : '/login';
+          default:
+            return null;
+        }
+      },
       refreshListenable: loginInfo,
       routes: [
         GoRoute(
